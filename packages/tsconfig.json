@@ -1,6 +1,7 @@
 {
   "files": [],
   "references": [
-    { "path": "./plugin-cli" }
+    { "path": "./impact-contracts" },
+    { "path": "./impact-core" }
   ]
 }

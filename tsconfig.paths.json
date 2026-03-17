@@ -3,29 +3,17 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@kb-labs/plugin-contracts": [
-        "../kb-labs-plugin/packages/plugin-contracts/src/index.ts"
+      "@kb-labs/impact-contracts": [
+        "packages/impact-contracts/src/index.ts"
       ],
-      "@kb-labs/plugin-contracts/*": [
-        "../kb-labs-plugin/packages/plugin-contracts/src/*"
-      ],
-      "@kb-labs/plugin-runtime": [
-        "../kb-labs-plugin/packages/plugin-runtime/src/index.ts"
-      ],
-      "@kb-labs/plugin-runtime/*": [
-        "../kb-labs-plugin/packages/plugin-runtime/src/*"
-      ],
-      "@kb-labs/plugin-template-contracts": [
-        "packages/plugin-template-contracts/src/index.ts"
-      ],
-      "@kb-labs/plugin-template-contracts/*": [
-        "packages/plugin-template-contracts/src/*"
+      "@kb-labs/impact-contracts/*": [
+        "packages/impact-contracts/src/*"
       ],
       "@kb-labs/sdk": [
-        "../kb-labs-sdk/packages/sdk/src/index.ts"
+        "../../platform/kb-labs-sdk/packages/sdk/src/index.ts"
       ],
       "@kb-labs/sdk/*": [
-        "../kb-labs-sdk/packages/sdk/src/*"
+        "../../platform/kb-labs-sdk/packages/sdk/src/*"
       ]
     }
   }

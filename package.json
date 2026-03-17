@@ -1,8 +1,8 @@
 {
-  "name": "@kb-labs/plugin-template",
+  "name": "@kb-labs/impact-analysis-plugin",
   "version": "0.1.0",
   "private": true,
-  "description": "Reference plugin template for the KB Labs ecosystem with devkit-powered tooling.",
+  "description": "Impact analysis plugin for KB Labs — analyzes workspace changes and shows affected packages and documentation.",
   "type": "module",
   "author": {
     "name": "Kirill Baranov",
@@ -62,7 +62,7 @@
     ]
   },
   "devDependencies": {
-    "@kb-labs/devkit": "link:../kb-labs-devkit",
+    "@kb-labs/devkit": "link:../../infra/kb-labs-devkit",
     "@typescript-eslint/eslint-plugin": "^8",
     "@typescript-eslint/parser": "^8",
     "@vitest/coverage-v8": "^3",
