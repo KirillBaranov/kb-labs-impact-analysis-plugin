@@ -4,7 +4,7 @@ export async function loadImpactRules(useConfigFn?: () => Promise<Partial<Impact
   if (useConfigFn) {
     try {
       const config = await useConfigFn();
-      if (config?.docRules?.length) return { docRules: config.docRules };
+      if (config?.docRules?.length) {return { docRules: config.docRules };}
     } catch { /* fallback to defaults */ }
   }
   return DEFAULT_IMPACT_CONFIG;

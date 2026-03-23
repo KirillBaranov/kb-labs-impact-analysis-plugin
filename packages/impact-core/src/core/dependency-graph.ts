@@ -1,6 +1,6 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import type { DepGraphNode, SubRepo } from '@kb-labs/impact-contracts';
+import type { DepGraphNode } from '@kb-labs/impact-contracts';
 import { listSubRepos } from './workspace.js';
 
 function discoverPackages(workspaceRoot: string): Array<{ name: string; repo: string; deps: string[] }> {
@@ -19,10 +19,10 @@ function discoverPackages(workspaceRoot: string): Array<{ name: string; repo: st
 
     for (const dir of dirs) {
       const pkgPath = join(dir, 'package.json');
-      if (!existsSync(pkgPath)) continue;
+      if (!existsSync(pkgPath)) {continue;}
       try {
         const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
-        if (!pkg.name?.startsWith('@kb-labs/')) continue;
+        if (!pkg.name?.startsWith('@kb-labs/')) {continue;}
         const allDeps = { ...pkg.dependencies };
         const kbDeps = Object.keys(allDeps).filter((d) => d.startsWith('@kb-labs/'));
         packages.push({ name: pkg.name, repo: repo.path, deps: kbDeps });

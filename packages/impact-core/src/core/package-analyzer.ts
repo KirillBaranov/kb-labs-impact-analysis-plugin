@@ -27,7 +27,7 @@ export function analyzePackageImpact(
 
   for (const name of changedNames) {
     const node = graph.get(name);
-    if (!node) continue;
+    if (!node) {continue;}
     for (const dep of node.dependedBy) {
       if (!seen.has(dep)) {
         queue.push({ name: dep, depth: 1 });
@@ -37,11 +37,11 @@ export function analyzePackageImpact(
 
   while (queue.length > 0) {
     const { name, depth } = queue.shift()!;
-    if (seen.has(name)) continue;
+    if (seen.has(name)) {continue;}
     seen.add(name);
 
     const node = graph.get(name);
-    if (!node) continue;
+    if (!node) {continue;}
 
     // Find reason (which direct/dependent package it depends on)
     const reasonPkg = node.dependsOn.find((d) => changedNames.has(d) || seen.has(d));
@@ -90,15 +90,15 @@ export function generateRecommendations(
   }
 
   for (const doc of docs.stale) {
-    if (doc.file) recs.push(`Regenerate ${doc.file}`);
+    if (doc.file) {recs.push(`Regenerate ${doc.file}`);}
   }
 
   for (const doc of docs.review) {
-    if (doc.file) recs.push(`Review ${doc.file}`);
+    if (doc.file) {recs.push(`Review ${doc.file}`);}
   }
 
   for (const doc of docs.reindex) {
-    if (doc.command) recs.push(`Run: ${doc.command}`);
+    if (doc.command) {recs.push(`Run: ${doc.command}`);}
   }
 
   return recs;

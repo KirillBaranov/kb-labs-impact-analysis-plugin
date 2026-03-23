@@ -30,7 +30,7 @@ function findPackagesInRepo(workspaceRoot: string, repo: SubRepo): ChangedPackag
   if (!existsSync(packagesDir)) {
     // Repo without packages/ — treat entire repo as one package
     const pkgJsonPath = join(fullRepoPath, 'package.json');
-    if (!existsSync(pkgJsonPath)) return [];
+    if (!existsSync(pkgJsonPath)) {return [];}
     try {
       const pkg = JSON.parse(readFileSync(pkgJsonPath, 'utf-8'));
       if (pkg.name?.startsWith('@kb-labs/')) {
@@ -41,12 +41,12 @@ function findPackagesInRepo(workspaceRoot: string, repo: SubRepo): ChangedPackag
   }
 
   for (const entry of readdirSync(packagesDir, { withFileTypes: true })) {
-    if (!entry.isDirectory() || entry.name.startsWith('.')) continue;
+    if (!entry.isDirectory() || entry.name.startsWith('.')) {continue;}
     const pkgJsonPath = join(packagesDir, entry.name, 'package.json');
-    if (!existsSync(pkgJsonPath)) continue;
+    if (!existsSync(pkgJsonPath)) {continue;}
     try {
       const pkg = JSON.parse(readFileSync(pkgJsonPath, 'utf-8'));
-      if (!pkg.name?.startsWith('@kb-labs/')) continue;
+      if (!pkg.name?.startsWith('@kb-labs/')) {continue;}
 
       // Count changed files in this package
       const pointerSha = getSubmodulePointer(workspaceRoot, repo.path);
@@ -75,18 +75,18 @@ export function detectChangedPackages(workspaceRoot: string): ChangedPackage[] {
 
   for (const repo of repos) {
     const fullPath = join(workspaceRoot, repo.path);
-    if (!existsSync(join(fullPath, '.git'))) continue;
+    if (!existsSync(join(fullPath, '.git'))) {continue;}
 
     const pointerSha = getSubmodulePointer(workspaceRoot, repo.path);
     const actualSha = getActualHead(fullPath);
 
     // Skip if no changes
-    if (pointerSha && pointerSha === actualSha) continue;
+    if (pointerSha && pointerSha === actualSha) {continue;}
 
     // Also check dirty working tree
     if (pointerSha === actualSha) {
       const dirty = git(fullPath, 'status --porcelain');
-      if (!dirty) continue;
+      if (!dirty) {continue;}
     }
 
     const pkgs = findPackagesInRepo(workspaceRoot, repo);

@@ -34,16 +34,16 @@ export default defineCommand<unknown, PkgInput, unknown>({
       try {
         root = findWorkspaceRoot();
       } catch {
-        if (flags.json) ctx.ui?.json?.({ packages: { direct: [], dependent: [], transitive: [] } });
-        else ctx.ui?.warn?.('Could not find workspace root');
+        if (flags.json) {ctx.ui?.json?.({ packages: { direct: [], dependent: [], transitive: [] } });}
+        else {ctx.ui?.warn?.('Could not find workspace root');}
         return { exitCode: 1 };
       }
 
       const changed = detectChangedPackages(root);
       if (changed.length === 0) {
         const empty = { packages: { direct: [], dependent: [], transitive: [] }, tests: { mustRun: [], noTests: [] }, recommendations: [] };
-        if (flags.json) ctx.ui?.json?.(empty);
-        else ctx.ui?.success?.('No changes detected');
+        if (flags.json) {ctx.ui?.json?.(empty);}
+        else {ctx.ui?.success?.('No changes detected');}
         return { exitCode: 0, result: empty };
       }
 

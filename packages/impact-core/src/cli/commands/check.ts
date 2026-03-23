@@ -45,15 +45,15 @@ export default defineCommand<unknown, CheckInput, ImpactAnalysisResult>({
       try {
         root = findWorkspaceRoot();
       } catch {
-        if (flags.json) ctx.ui?.json?.(EMPTY_RESULT);
-        else ctx.ui?.warn?.('Could not find workspace root');
+        if (flags.json) {ctx.ui?.json?.(EMPTY_RESULT);}
+        else {ctx.ui?.warn?.('Could not find workspace root');}
         return { exitCode: 1 };
       }
 
       const changed = detectChangedPackages(root);
       if (changed.length === 0) {
-        if (flags.json) ctx.ui?.json?.(EMPTY_RESULT);
-        else ctx.ui?.success?.('No changes detected');
+        if (flags.json) {ctx.ui?.json?.(EMPTY_RESULT);}
+        else {ctx.ui?.success?.('No changes detected');}
         return { exitCode: 0, result: EMPTY_RESULT };
       }
 

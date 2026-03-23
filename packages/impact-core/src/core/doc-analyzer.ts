@@ -1,8 +1,8 @@
-import type { DocImpact, DocRule, ImpactPluginConfig, PackageImpact } from '@kb-labs/impact-contracts';
+import type { DocImpact, ImpactPluginConfig, PackageImpact } from '@kb-labs/impact-contracts';
 
 function matchesRule(packageName: string, pattern: string): boolean {
-  if (pattern === packageName) return true;
-  if (pattern === '__new_package__') return false; // handled separately
+  if (pattern === packageName) {return true;}
+  if (pattern === '__new_package__') {return false;} // handled separately
 
   // Simple glob: *-cli matches @kb-labs/agent-cli
   if (pattern.startsWith('*')) {
@@ -27,7 +27,7 @@ export function analyzeDocImpact(
 
   for (const pkg of impactedPackages) {
     for (const rule of config.docRules) {
-      if (!matchesRule(pkg.name, rule.match)) continue;
+      if (!matchesRule(pkg.name, rule.match)) {continue;}
 
       if (rule.action === 'reindex') {
         const key = `reindex:${rule.command ?? ''}`;
@@ -44,7 +44,7 @@ export function analyzeDocImpact(
 
       for (const doc of rule.docs ?? []) {
         const key = `${rule.action}:${doc}`;
-        if (seenDocs.has(key)) continue;
+        if (seenDocs.has(key)) {continue;}
         seenDocs.add(key);
 
         const impact: DocImpact = {
@@ -54,8 +54,8 @@ export function analyzeDocImpact(
           command: rule.command,
         };
 
-        if (rule.action === 'regenerate') stale.push(impact);
-        else review.push(impact);
+        if (rule.action === 'regenerate') {stale.push(impact);}
+        else {review.push(impact);}
       }
     }
   }

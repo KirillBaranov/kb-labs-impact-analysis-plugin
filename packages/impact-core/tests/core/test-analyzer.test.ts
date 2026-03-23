@@ -31,23 +31,23 @@ describe('analyzeTestImpact', () => {
     mockExistsSync.mockImplementation((p: any) => {
       const s = String(p);
       // workspace root markers
-      if (s.endsWith('.gitmodules') || s.endsWith('kb.config.json')) return s.includes('/root/');
+      if (s.endsWith('.gitmodules') || s.endsWith('kb.config.json')) {return s.includes('/root/');}
       // repo structure
-      if (s.endsWith('/root/platform')) return true;
-      if (s.includes('repo-a/packages')) return true;
-      if (s.includes('pkg-a')) return true;
-      if (s.endsWith('.git') || s.endsWith('package.json')) return true;
+      if (s.endsWith('/root/platform')) {return true;}
+      if (s.includes('repo-a/packages')) {return true;}
+      if (s.includes('pkg-a')) {return true;}
+      if (s.endsWith('.git') || s.endsWith('package.json')) {return true;}
       // test dir exists for pkg-a
-      if (s.includes('pkg-a/tests')) return true;
+      if (s.includes('pkg-a/tests')) {return true;}
       return false;
     });
 
     mockReaddirSync.mockImplementation((p: any) => {
       const s = String(p);
-      if (s.endsWith('/root/platform')) return [mockDirEntry('repo-a')] as any;
-      if (s.endsWith('repo-a/packages')) return [mockDirEntry('pkg-a')] as any;
+      if (s.endsWith('/root/platform')) {return [mockDirEntry('repo-a')] as any;}
+      if (s.endsWith('repo-a/packages')) {return [mockDirEntry('pkg-a')] as any;}
       // test files in tests/
-      if (s.includes('pkg-a/tests')) return [mockFileEntry('foo.test.ts'), mockFileEntry('bar.spec.ts')] as any;
+      if (s.includes('pkg-a/tests')) {return [mockFileEntry('foo.test.ts'), mockFileEntry('bar.spec.ts')] as any;}
       return [] as any;
     });
 
@@ -75,19 +75,19 @@ describe('analyzeTestImpact', () => {
   it('detects packages without tests → noTests', () => {
     mockExistsSync.mockImplementation((p: any) => {
       const s = String(p);
-      if (s.endsWith('.gitmodules') || s.endsWith('kb.config.json')) return s.includes('/root/');
-      if (s.endsWith('/root/platform')) return true;
-      if (s.includes('repo-b/packages')) return true;
-      if (s.includes('pkg-b')) return true;
-      if (s.endsWith('.git') || s.endsWith('package.json')) return true;
+      if (s.endsWith('.gitmodules') || s.endsWith('kb.config.json')) {return s.includes('/root/');}
+      if (s.endsWith('/root/platform')) {return true;}
+      if (s.includes('repo-b/packages')) {return true;}
+      if (s.includes('pkg-b')) {return true;}
+      if (s.endsWith('.git') || s.endsWith('package.json')) {return true;}
       // NO test dirs
       return false;
     });
 
     mockReaddirSync.mockImplementation((p: any) => {
       const s = String(p);
-      if (s.endsWith('/root/platform')) return [mockDirEntry('repo-b')] as any;
-      if (s.endsWith('repo-b/packages')) return [mockDirEntry('pkg-b')] as any;
+      if (s.endsWith('/root/platform')) {return [mockDirEntry('repo-b')] as any;}
+      if (s.endsWith('repo-b/packages')) {return [mockDirEntry('pkg-b')] as any;}
       return [] as any;
     });
 

@@ -16,9 +16,9 @@ function findPackageDir(workspaceRoot: string, repo: string, packageName: string
 
   // Search for the package by name in package.json files
   for (const entry of readdirSync(packagesDir, { withFileTypes: true })) {
-    if (!entry.isDirectory() || entry.name.startsWith('.')) continue;
+    if (!entry.isDirectory() || entry.name.startsWith('.')) {continue;}
     const pkgJsonPath = join(packagesDir, entry.name, 'package.json');
-    if (!existsSync(pkgJsonPath)) continue;
+    if (!existsSync(pkgJsonPath)) {continue;}
     try {
       const pkg = JSON.parse(readFileSync(pkgJsonPath, 'utf-8'));
       if (pkg.name === packageName) {
@@ -34,9 +34,9 @@ function countTestFiles(dir: string): number {
   let count = 0;
 
   function walk(d: string): void {
-    if (!existsSync(d)) return;
+    if (!existsSync(d)) {return;}
     for (const entry of readdirSync(d, { withFileTypes: true })) {
-      if (entry.name === 'node_modules' || entry.name === 'dist') continue;
+      if (entry.name === 'node_modules' || entry.name === 'dist') {continue;}
       const full = join(d, entry.name);
       if (entry.isDirectory()) {
         walk(full);
@@ -56,7 +56,7 @@ function detectTests(packageDir: string): { hasTests: boolean; testCount: number
     const fullPath = join(packageDir, testDir);
     if (existsSync(fullPath)) {
       const count = countTestFiles(fullPath);
-      if (count > 0) return { hasTests: true, testCount: count };
+      if (count > 0) {return { hasTests: true, testCount: count };}
     }
   }
 
@@ -64,7 +64,7 @@ function detectTests(packageDir: string): { hasTests: boolean; testCount: number
   const srcDir = join(packageDir, 'src');
   if (existsSync(srcDir)) {
     const count = countTestFiles(srcDir);
-    if (count > 0) return { hasTests: true, testCount: count };
+    if (count > 0) {return { hasTests: true, testCount: count };}
   }
 
   return { hasTests: false, testCount: 0 };

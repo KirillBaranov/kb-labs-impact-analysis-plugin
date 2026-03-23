@@ -9,7 +9,7 @@ export function findWorkspaceRoot(cwd?: string): string {
       return dir;
     }
     const parent = resolve(dir, '..');
-    if (parent === dir) break;
+    if (parent === dir) {break;}
     dir = parent;
   }
   throw new Error('Could not find workspace root (no .gitmodules or .kb/kb.config.json found)');
@@ -38,7 +38,7 @@ function parseSubReposFromGitmodules(gitmodulesPath: string, workspaceRoot: stri
     const pathMatches = content.matchAll(/^\s*path\s*=\s*(.+)$/gm);
     for (const match of pathMatches) {
       const relPath = (match[1] ?? '').trim();
-      if (!relPath) continue;
+      if (!relPath) {continue;}
 
       const fullPath = join(workspaceRoot, relPath);
       if (!existsSync(join(fullPath, '.git')) && !existsSync(join(fullPath, 'package.json'))) {
@@ -60,7 +60,7 @@ function scanFlatLayout(workspaceRoot: string): SubRepo[] {
   const repos: SubRepo[] = [];
   try {
     for (const entry of readdirSync(workspaceRoot, { withFileTypes: true })) {
-      if (!entry.isDirectory() || entry.name.startsWith('.') || entry.name === 'node_modules') continue;
+      if (!entry.isDirectory() || entry.name.startsWith('.') || entry.name === 'node_modules') {continue;}
       const fullPath = join(workspaceRoot, entry.name);
       if (existsSync(join(fullPath, '.git')) || existsSync(join(fullPath, 'package.json'))) {
         repos.push({ path: entry.name, category: '', name: entry.name });

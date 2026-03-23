@@ -73,7 +73,7 @@ export function formatHumanReadable(result: ImpactAnalysisResult): string {
       lines.push(`  ${YELLOW}Stale (${stale.length}):${RESET}`);
       for (const d of stale) {
         lines.push(`    ${d.file} — ${d.reason}`);
-        if (d.command) lines.push(`    ${CYAN}→ Run: ${d.command}${RESET}`);
+        if (d.command) {lines.push(`    ${CYAN}→ Run: ${d.command}${RESET}`);}
       }
     }
 
@@ -88,7 +88,7 @@ export function formatHumanReadable(result: ImpactAnalysisResult): string {
       lines.push(`  ${CYAN}Reindex (${reindex.length}):${RESET}`);
       for (const d of reindex) {
         lines.push(`    ${d.reason}`);
-        if (d.command) lines.push(`    ${CYAN}→ Run: ${d.command}${RESET}`);
+        if (d.command) {lines.push(`    ${CYAN}→ Run: ${d.command}${RESET}`);}
       }
     }
 
@@ -108,7 +108,7 @@ export function formatHumanReadable(result: ImpactAnalysisResult): string {
         const count = t.testCount ? ` — ${t.testCount} test file${t.testCount === 1 ? '' : 's'}` : '';
         const reason = t.level === 'direct' ? 'changed' : t.reason ?? '';
         lines.push(`    ${t.name}${count} ${DIM}← ${reason}${RESET}`);
-        if (t.command) lines.push(`    ${CYAN}→ ${t.command}${RESET}`);
+        if (t.command) {lines.push(`    ${CYAN}→ ${t.command}${RESET}`);}
       }
     }
 

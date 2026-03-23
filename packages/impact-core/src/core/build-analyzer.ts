@@ -25,7 +25,7 @@ export function analyzeBuildImpact(
   // Kahn's algorithm
   const queue: string[] = [];
   for (const [name, degree] of inDegree) {
-    if (degree === 0) queue.push(name);
+    if (degree === 0) {queue.push(name);}
   }
 
   const sorted: string[] = [];
@@ -37,17 +37,17 @@ export function analyzeBuildImpact(
     const node = graph.get(current);
     if (node) {
       for (const dependent of node.dependedBy) {
-        if (!impactedNames.has(dependent)) continue;
+        if (!impactedNames.has(dependent)) {continue;}
         const deg = (inDegree.get(dependent) ?? 1) - 1;
         inDegree.set(dependent, deg);
-        if (deg === 0) queue.push(dependent);
+        if (deg === 0) {queue.push(dependent);}
       }
     }
   }
 
   // If some packages weren't reached (circular deps), append them at the end
   for (const name of impactedNames) {
-    if (!sorted.includes(name)) sorted.push(name);
+    if (!sorted.includes(name)) {sorted.push(name);}
   }
 
   const steps: BuildImpact[] = sorted.map((name, idx) => {
