@@ -1,6 +1,6 @@
 {
   "name": "@kb-labs/impact-analysis-plugin",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Impact analysis plugin for KB Labs — analyzes workspace changes and shows affected packages and documentation.",
   "type": "module",
   "author": {
